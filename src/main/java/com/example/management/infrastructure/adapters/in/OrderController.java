@@ -1,9 +1,8 @@
 package com.example.management.infrastructure.adapters.in;
 
+import com.example.management.application.ports.in.CreateOrderItemCommand;
 import com.example.management.application.ports.in.OrderUseCase;
-import com.example.management.domain.model.Money;
 import com.example.management.domain.model.Order;
-import com.example.management.domain.model.OrderItem;
 import com.example.management.infrastructure.adapters.in.dto.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+
 
 /**
  * Input adapter (REST controller) for order operations. Base path /api/v1.
@@ -31,8 +31,8 @@ public class OrderController {
         if (request.items() == null || request.items().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        List<OrderItem> items = request.items().stream()
-                .map(dto -> new OrderItem(dto.productId(), dto.quantity(), new Money(dto.unitPrice())))
+        List<CreateOrderItemCommand> items = request.items().stream()
+                .map(dto -> new CreateOrderItemCommand(dto.productId(), dto.quantity(), dto.unitPrice()))
                 .toList();
         Order order = orderUseCase.createOrder(request.customerId(), items);
         CreateOrderResponse body = new CreateOrderResponse(

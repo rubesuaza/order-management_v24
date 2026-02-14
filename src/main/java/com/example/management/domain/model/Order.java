@@ -44,10 +44,10 @@ public final class Order {
         if (items.isEmpty()) {
             throw new InvalidItemException("An Order must have at least one OrderItem to be created");
         }
-        Money total = items.get(0).lineTotal();
-        for (int i = 1; i < items.size(); i++) {
-            total = total.add(items.get(i).lineTotal());
-        }
+        Money total = items.stream()
+                .map(OrderItem::lineTotal)
+                .reduce(Money::add)
+                .orElseThrow();
         return new Order(orderId, customerId, items, total, LocalDateTime.now());
     }
 
@@ -91,14 +91,22 @@ public final class Order {
     }
 
     public void markAsPaid() {
-        if (status != OrderStatus.PENDING) {
-            throw new InvalidOrderStateException("Order can only be marked as PAID when status is PENDING");
-        }
-        if (totalAmount.amount().compareTo(MINIMUM_ORDER_AMOUNT) < 0) {
+        if (!canBeMarkedAsPaid()) {
+            if (status != OrderStatus.PENDING) {
+                throw new InvalidOrderStateException("Order can only be marked as PAID when status is PENDING");
+            }
             throw new InvalidOrderStateException(
                     "Order cannot be placed: total amount must be at least 10.00 USD");
         }
         this.status = OrderStatus.PAID;
+    }
+
+    private boolean canBeMarkedAsPaid() {
+        return status == OrderStatus.PENDING && meetsMinimumOrderAmount();
+    }
+
+    private boolean meetsMinimumOrderAmount() {
+        return totalAmount.amount().compareTo(MINIMUM_ORDER_AMOUNT) >= 0;
     }
 
     public void ship() {

@@ -29,7 +29,7 @@ public class OrderRepositoryAdapter implements OrderRepositoryPort {
         Optional<OrderEntity> existing = jpaRepository.findByIdWithItems(order.getId());
         if (existing.isPresent()) {
             OrderEntity entity = existing.get();
-            mapper.updateEntityStatus(entity, order.getStatus());
+            mapper.updateEntityFromDomain(entity, order);
             return mapper.toDomain(jpaRepository.save(entity));
         }
         OrderEntity entity = mapper.toEntity(order);

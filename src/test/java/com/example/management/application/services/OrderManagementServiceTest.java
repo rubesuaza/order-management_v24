@@ -1,6 +1,8 @@
 package com.example.management.application.services;
 
+import com.example.management.application.ports.in.CreateOrderItemCommand;
 import com.example.management.application.ports.out.OrderRepositoryPort;
+import com.example.management.domain.exception.OrderNotFoundException;
 import com.example.management.domain.model.Money;
 import com.example.management.domain.model.Order;
 import com.example.management.domain.model.OrderItem;
@@ -37,11 +39,11 @@ class OrderManagementServiceTest {
 
     @Test
     void createOrderShouldDelegateToRepository() {
-        var item = new OrderItem(UUID.randomUUID(), 2, TEN_USD);
-        var savedOrder = Order.create(UUID.randomUUID(), CUSTOMER_ID, List.of(item));
+        var productId = UUID.randomUUID();
+        var itemCommand = new CreateOrderItemCommand(productId, 2, TEN_USD.amount());
         when(orderRepositoryPort.save(any(Order.class))).thenAnswer(inv -> inv.getArgument(0));
 
-        Order result = orderManagementService.createOrder(CUSTOMER_ID, List.of(item));
+        Order result = orderManagementService.createOrder(CUSTOMER_ID, List.of(itemCommand));
 
         assertThat(result.getCustomerId()).isEqualTo(CUSTOMER_ID);
         assertThat(result.getItems()).hasSize(1);
@@ -90,7 +92,7 @@ class OrderManagementServiceTest {
         when(orderRepositoryPort.findById(any(UUID.class))).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> orderManagementService.payOrder(UUID.randomUUID()))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(OrderNotFoundException.class)
                 .hasMessageContaining("Order not found");
     }
 }

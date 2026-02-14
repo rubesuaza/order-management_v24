@@ -1,7 +1,6 @@
 package com.example.management.application.ports.in;
 
 import com.example.management.domain.model.Order;
-import com.example.management.domain.model.OrderItem;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,7 @@ import java.util.UUID;
  */
 public interface OrderUseCase {
 
-    Order createOrder(UUID customerId, List<OrderItem> items);
+    Order createOrder(UUID customerId, List<CreateOrderItemCommand> items);
 
     Optional<Order> getOrder(UUID orderId);
 

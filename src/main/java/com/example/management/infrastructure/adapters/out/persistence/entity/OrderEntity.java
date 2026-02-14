@@ -56,7 +56,9 @@ public class OrderEntity {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public BigDecimal getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
     public String getCurrency() { return currency; }
+    public void setCurrency(String currency) { this.currency = currency; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public List<OrderItemEntity> getItems() { return items; }
 }
