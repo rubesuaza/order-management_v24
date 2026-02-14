@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.management.domain.model.OrderTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-02-14T17:26:39" hostname="RubenS" time="0.068">
+<testsuite name="com.example.management.domain.model.OrderTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-02-14T17:31:49" hostname="RubenS" time="0.073">
   <properties/>
-  <testcase name="shouldNotCancelOrderWhenShipped()" classname="com.example.management.domain.model.OrderTest" time="0.004"/>
-  <testcase name="shouldCreateOrderWithAtLeastOneItem()" classname="com.example.management.domain.model.OrderTest" time="0.015"/>
-  <testcase name="shouldPlaceOrderWhenTotalAtOrAboveMinimum()" classname="com.example.management.domain.model.OrderTest" time="0.002"/>
-  <testcase name="shouldNotShipOrderWhenPending()" classname="com.example.management.domain.model.OrderTest" time="0.003"/>
+  <testcase name="shouldNotCancelOrderWhenShipped()" classname="com.example.management.domain.model.OrderTest" time="0.002"/>
+  <testcase name="shouldCreateOrderWithAtLeastOneItem()" classname="com.example.management.domain.model.OrderTest" time="0.003"/>
+  <testcase name="shouldDeliverOrderOnlyWhenShipped()" classname="com.example.management.domain.model.OrderTest" time="0.003"/>
+  <testcase name="shouldPlaceOrderWhenTotalAtOrAboveMinimum()" classname="com.example.management.domain.model.OrderTest" time="0.001"/>
+  <testcase name="shouldReconstituteOrderWithGivenStatus()" classname="com.example.management.domain.model.OrderTest" time="0.003"/>
+  <testcase name="shouldNotShipOrderWhenPending()" classname="com.example.management.domain.model.OrderTest" time="0.002"/>
   <testcase name="shouldRejectOrderWithNoItems()" classname="com.example.management.domain.model.OrderTest" time="0.003"/>
-  <testcase name="shouldShipOrderOnlyWhenPaid()" classname="com.example.management.domain.model.OrderTest" time="0.003"/>
+  <testcase name="shouldRejectCreateOrderWhenOrderIdIsNull()" classname="com.example.management.domain.model.OrderTest" time="0.002"/>
+  <testcase name="shouldShipOrderOnlyWhenPaid()" classname="com.example.management.domain.model.OrderTest" time="0.001"/>
   <testcase name="shouldCancelOrderWhenPending()" classname="com.example.management.domain.model.OrderTest" time="0.002"/>
   <testcase name="shouldCancelOrderWhenPaid()" classname="com.example.management.domain.model.OrderTest" time="0.002"/>
-  <testcase name="totalAmountShouldBeSumOfLineTotals()" classname="com.example.management.domain.model.OrderTest" time="0.003"/>
+  <testcase name="shouldNotDeliverOrderWhenNotShipped()" classname="com.example.management.domain.model.OrderTest" time="0.005"/>
+  <testcase name="totalAmountShouldBeSumOfLineTotals()" classname="com.example.management.domain.model.OrderTest" time="0.002"/>
+  <testcase name="shouldRejectCreateOrderWhenItemsIsNull()" classname="com.example.management.domain.model.OrderTest" time="0.005"/>
   <testcase name="shouldNotPlaceOrderBelowMinimumValue()" classname="com.example.management.domain.model.OrderTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

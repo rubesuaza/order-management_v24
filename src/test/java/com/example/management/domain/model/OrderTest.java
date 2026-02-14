@@ -116,4 +116,53 @@ class OrderTest {
                 .isInstanceOf(InvalidOrderStateException.class)
                 .hasMessageContaining("SHIPPED");
     }
+
+    @Test
+    void shouldReconstituteOrderWithGivenStatus() {
+        var orderId = UUID.randomUUID();
+        var item = new OrderItem(UUID.randomUUID(), 1, TEN_USD);
+        var total = new Money(new BigDecimal("10.00"));
+        var createdAt = LocalDateTime.now().minusDays(1);
+
+        var order = Order.reconstitute(orderId, CUSTOMER_ID, createdAt,
+                List.of(item), total, OrderStatus.SHIPPED);
+
+        assertThat(order.getId()).isEqualTo(orderId);
+        assertThat(order.getStatus()).isEqualTo(OrderStatus.SHIPPED);
+        assertThat(order.getCreatedAt()).isEqualTo(createdAt);
+    }
+
+    @Test
+    void shouldDeliverOrderOnlyWhenShipped() {
+        var order = Order.create(UUID.randomUUID(), CUSTOMER_ID,
+                List.of(new OrderItem(UUID.randomUUID(), 1, TEN_USD)));
+        order.markAsPaid();
+        order.ship();
+        order.deliver();
+        assertThat(order.getStatus()).isEqualTo(OrderStatus.DELIVERED);
+    }
+
+    @Test
+    void shouldNotDeliverOrderWhenNotShipped() {
+        var order = Order.create(UUID.randomUUID(), CUSTOMER_ID,
+                List.of(new OrderItem(UUID.randomUUID(), 1, TEN_USD)));
+        order.markAsPaid();
+
+        assertThatThrownBy(order::deliver)
+                .isInstanceOf(InvalidOrderStateException.class)
+                .hasMessageContaining("DELIVERED");
+    }
+
+    @Test
+    void shouldRejectCreateOrderWhenOrderIdIsNull() {
+        assertThatThrownBy(() -> Order.create(null, CUSTOMER_ID,
+                List.of(new OrderItem(UUID.randomUUID(), 1, TEN_USD))))
+                .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void shouldRejectCreateOrderWhenItemsIsNull() {
+        assertThatThrownBy(() -> Order.create(UUID.randomUUID(), CUSTOMER_ID, null))
+                .isInstanceOf(NullPointerException.class);
+    }
 }

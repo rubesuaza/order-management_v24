@@ -3,8 +3,16 @@ package com.example.management.domain.model;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class AddressTest {
+
+    @Test
+    void shouldRejectNullStreet() {
+        assertThatThrownBy(() -> new Address(null, "City", "ZIP", "Country"))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessageContaining("street");
+    }
 
     @Test
     void shouldCreateAddressWithAllFields() {
