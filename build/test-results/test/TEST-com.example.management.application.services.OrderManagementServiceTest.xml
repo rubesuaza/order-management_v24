@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.management.application.services.OrderManagementServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-14T17:23:15" hostname="RubenS" time="2.94">
+<testsuite name="com.example.management.application.services.OrderManagementServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-14T17:26:38" hostname="RubenS" time="1.53">
   <properties/>
-  <testcase name="serviceShouldBeCreated()" classname="com.example.management.application.services.OrderManagementServiceTest" time="2.94"/>
+  <testcase name="serviceShouldBeCreated()" classname="com.example.management.application.services.OrderManagementServiceTest" time="1.53"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
