@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.management.ManagementApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:37:45.678Z" hostname="RubenS" time="2.706">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.example.management.ManagementApplicationTests" time="2.706"/>
+  <system-out><![CDATA[11:37:41.584 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.management.ManagementApplicationTests]: ManagementApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:37:41.835 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.management.ManagementApplication for test class com.example.management.ManagementApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-02-15T11:37:43.211-05:00  INFO 8896 --- [management] [    Test worker] c.e.m.ManagementApplicationTests         : Starting ManagementApplicationTests using Java 17.0.18 with PID 8896 (started by root in /root/agent_code_generator/workspaces/order_management_workspace/order-management_v24)
+2026-02-15T11:37:43.216-05:00  INFO 8896 --- [management] [    Test worker] c.e.m.ManagementApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-02-15T11:37:45.618-05:00  INFO 8896 --- [management] [    Test worker] c.e.m.ManagementApplicationTests         : Started ManagementApplicationTests in 3.339 seconds (process running for 5.935)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
