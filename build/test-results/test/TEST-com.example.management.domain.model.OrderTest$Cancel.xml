@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="cancel" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:40:58.808Z" hostname="RubenS" time="0.014">
+  <properties/>
+  <testcase name="rejectsCancelWhenShipped()" classname="com.example.management.domain.model.OrderTest$Cancel" time="0.005"/>
+  <testcase name="cancelWhenPaid()" classname="com.example.management.domain.model.OrderTest$Cancel" time="0.002"/>
+  <testcase name="cancelWhenPending()" classname="com.example.management.domain.model.OrderTest$Cancel" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
