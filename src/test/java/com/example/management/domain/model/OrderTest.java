@@ -47,6 +47,13 @@ class OrderTest {
         }
 
         @Test
+        void rejectsNullCustomerId() {
+            assertThatThrownBy(() -> new Order(null, List.of(validItem())))
+                    .isInstanceOf(DomainException.class)
+                    .hasMessageContaining("CustomerId");
+        }
+
+        @Test
         void rejectsEmptyItems() {
             assertThatThrownBy(() -> new Order(CUSTOMER_ID, List.of()))
                     .isInstanceOf(DomainException.class)

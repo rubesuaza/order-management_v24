@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="creation" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:40:58.775Z" hostname="RubenS" time="0.025">
+<testsuite name="creation" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:47:44.460Z" hostname="RubenS" time="0.036">
   <properties/>
-  <testcase name="createsWithPositiveQuantityAndNonNegativePrice()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.01"/>
-  <testcase name="rejectsZeroQuantity()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.004"/>
-  <testcase name="rejectsNegativeUnitPrice()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.002"/>
-  <testcase name="rejectsNegativeQuantity()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.002"/>
+  <testcase name="createsWithPositiveQuantityAndNonNegativePrice()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.002"/>
+  <testcase name="rejectsZeroQuantity()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.003"/>
+  <testcase name="rejectsNegativeUnitPrice()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.009"/>
+  <testcase name="rejectsNegativeQuantity()" classname="com.example.management.domain.model.OrderItemTest$Creation" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
