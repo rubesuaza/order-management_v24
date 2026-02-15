@@ -1,6 +1,7 @@
 package com.example.management.application.ports.in;
 
-import com.example.management.domain.model.Order;
+import com.example.management.application.dtos.CreateOrderOutput;
+import com.example.management.application.dtos.OrderItemDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,8 +13,8 @@ public interface CreateOrderUseCase {
 
     /**
      * @param customerId customer identifier
-     * @param items      productId, quantity, unitPrice per item
-     * @return the created order
+     * @param items      application DTOs: productId, quantity, unitPrice per item
+     * @return the created order output (application-layer DTO)
      */
-    Order create(UUID customerId, List<OrderItemCommand> items);
+    CreateOrderOutput create(UUID customerId, List<OrderItemDto> items);
 }

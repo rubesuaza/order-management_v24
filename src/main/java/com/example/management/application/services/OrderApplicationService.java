@@ -1,8 +1,8 @@
 package com.example.management.application.services;
 
+import com.example.management.application.dtos.*;
 import com.example.management.application.ports.in.CreateOrderUseCase;
 import com.example.management.application.ports.in.GetOrderUseCase;
-import com.example.management.application.ports.in.OrderItemCommand;
 import com.example.management.application.ports.in.PayOrderUseCase;
 import com.example.management.application.ports.out.OrderRepository;
 import com.example.management.domain.model.Money;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Application service implementing order use cases.
+ * Maps domain Order to application-level output DTOs.
  */
 @Service
 public class OrderApplicationService implements CreateOrderUseCase, GetOrderUseCase, PayOrderUseCase {
@@ -28,27 +28,56 @@ public class OrderApplicationService implements CreateOrderUseCase, GetOrderUseC
     }
 
     @Override
-    public Order create(UUID customerId, List<OrderItemCommand> items) {
+    public CreateOrderOutput create(UUID customerId, List<OrderItemDto> items) {
         List<OrderItem> domainItems = items.stream()
-                .map(cmd -> new OrderItem(
-                        cmd.getProductId(),
-                        cmd.getQuantity(),
-                        new Money(cmd.getUnitPrice())))
-                .collect(Collectors.toList());
+                .map(dto -> new OrderItem(
+                        dto.getProductId(),
+                        dto.getQuantity(),
+                        new Money(dto.getUnitPrice())))
+                .toList();
         Order order = new Order(customerId, domainItems);
-        return orderRepository.save(order);
+        Order saved = orderRepository.save(order);
+        return toCreateOrderOutput(saved);
     }
 
     @Override
-    public Optional<Order> getById(UUID orderId) {
-        return orderRepository.findById(orderId);
+    public Optional<OrderDetailOutput> getById(UUID orderId) {
+        return orderRepository.findById(orderId)
+                .map(this::toOrderDetailOutput);
     }
 
     @Override
-    public Order pay(UUID orderId) {
+    public PayOrderOutput pay(UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("Order not found: " + orderId));
         order.markAsPaid();
-        return orderRepository.save(order);
+        Order saved = orderRepository.save(order);
+        return new PayOrderOutput(saved.getId(), saved.getStatus().name());
+    }
+
+    private CreateOrderOutput toCreateOrderOutput(Order order) {
+        return new CreateOrderOutput(
+                order.getId(),
+                order.getStatus().name(),
+                order.getTotalAmount().getAmount(),
+                order.getCreatedAt()
+        );
+    }
+
+    private OrderDetailOutput toOrderDetailOutput(Order order) {
+        List<OrderItemOutput> itemOutputs = order.getItems().stream()
+                .map(i -> new OrderItemOutput(
+                        i.getProductId(),
+                        i.getQuantity(),
+                        i.getUnitPrice().getAmount()))
+                .toList();
+        return new OrderDetailOutput(
+                order.getId(),
+                order.getCustomerId(),
+                order.getStatus().name(),
+                itemOutputs,
+                order.getTotalAmount().getAmount(),
+                order.getTotalAmount().getCurrency()
+        );
     }
 }

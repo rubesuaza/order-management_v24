@@ -2,23 +2,19 @@ package com.example.management.infrastructure.adapters.in.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailResponse {
 
-    private UUID orderId;
-    private UUID customerId;
-    private String status;
-    private List<OrderItemResponse> items;
-    private BigDecimal totalAmount;
-    private String currency;
+    private final UUID orderId;
+    private final UUID customerId;
+    private final String status;
+    private final List<OrderItemResponse> items;
+    private final BigDecimal totalAmount;
+    private final String currency;
 }

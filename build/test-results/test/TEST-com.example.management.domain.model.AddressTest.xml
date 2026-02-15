@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Address Value Object" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:47:44.305Z" hostname="RubenS" time="0.016">
+<testsuite name="Address Value Object" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:50:36.678Z" hostname="RubenS" time="0.008">
   <properties/>
-  <testcase name="holdsStreetCityZipCodeCountry()" classname="com.example.management.domain.model.AddressTest" time="0.016"/>
+  <testcase name="holdsStreetCityZipCodeCountry()" classname="com.example.management.domain.model.AddressTest" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

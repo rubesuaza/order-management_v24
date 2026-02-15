@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="create" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:47:44.199Z" hostname="RubenS" time="0.097">
+<testsuite name="create" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:50:36.631Z" hostname="RubenS" time="0.041">
   <properties/>
-  <testcase name="createsOrderAndSavesViaRepository()" classname="com.example.management.application.services.OrderApplicationServiceTest$Create" time="0.075"/>
-  <testcase name="createWithMultipleItems_calculatesTotalCorrectly()" classname="com.example.management.application.services.OrderApplicationServiceTest$Create" time="0.017"/>
+  <testcase name="createsOrderAndSavesViaRepository()" classname="com.example.management.application.services.OrderApplicationServiceTest$Create" time="0.031"/>
+  <testcase name="createWithMultipleItems_calculatesTotalCorrectly()" classname="com.example.management.application.services.OrderApplicationServiceTest$Create" time="0.007"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

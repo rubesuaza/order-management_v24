@@ -57,21 +57,23 @@ public class Order {
     }
 
     private static Money calculateTotal(List<OrderItem> items) {
-        Money sum = new Money(java.math.BigDecimal.ZERO);
-        for (OrderItem item : items) {
-            sum = sum.add(item.getLineTotal());
-        }
-        return sum;
+        return items.stream()
+                .map(OrderItem::getLineTotal)
+                .reduce(new Money(java.math.BigDecimal.ZERO), Money::add);
     }
 
     public void markAsPaid() {
         if (status != OrderStatus.PENDING) {
             throw new InvalidOrderStateException("Only PENDING orders can be marked as PAID");
         }
-        if (totalAmount.getAmount().compareTo(MINIMUM_ORDER_AMOUNT) < 0) {
+        if (!meetsMinimumOrderAmount()) {
             throw new DomainException("Order total must be at least 10.00 USD to be placed");
         }
         this.status = OrderStatus.PAID;
+    }
+
+    private boolean meetsMinimumOrderAmount() {
+        return totalAmount.getAmount().compareTo(MINIMUM_ORDER_AMOUNT) >= 0;
     }
 
     public void ship() {

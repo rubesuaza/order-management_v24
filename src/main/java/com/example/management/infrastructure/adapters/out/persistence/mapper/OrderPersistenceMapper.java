@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Maps between domain Order/OrderItem and JPA entities.
@@ -29,7 +28,7 @@ public class OrderPersistenceMapper {
                 .build();
         for (OrderItem item : order.getItems()) {
             OrderItemEntity itemEntity = OrderItemEntity.builder()
-                    .id(UUID.randomUUID())
+                    .id(item.getId() != null ? item.getId() : UUID.randomUUID())
                     .order(entity)
                     .productId(item.getProductId())
                     .quantity(item.getQuantity())
@@ -43,10 +42,11 @@ public class OrderPersistenceMapper {
     public Order toDomain(OrderEntity entity) {
         List<OrderItem> items = entity.getItems().stream()
                 .map(i -> new OrderItem(
+                        i.getId(),
                         i.getProductId(),
                         i.getQuantity(),
                         new Money(i.getUnitPrice(), entity.getCurrency())))
-                .collect(Collectors.toList());
+                .toList();
         Money totalAmount = new Money(entity.getTotalAmount(), entity.getCurrency());
         return new Order(
                 entity.getId(),

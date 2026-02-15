@@ -1,6 +1,6 @@
 package com.example.management.application.services;
 
-import com.example.management.application.ports.in.OrderItemCommand;
+import com.example.management.application.dtos.OrderItemDto;
 import com.example.management.application.ports.out.OrderRepository;
 import com.example.management.domain.model.Money;
 import com.example.management.domain.model.Order;
@@ -44,13 +44,10 @@ class OrderApplicationServiceTest {
     class Create {
         @Test
         void createsOrderAndSavesViaRepository() {
-            OrderItemCommand cmd = new OrderItemCommand(PRODUCT_ID, 2, new BigDecimal("10.00"));
-            Order savedOrder = new Order(CUSTOMER_ID, List.of(
-                    new OrderItem(PRODUCT_ID, 2, new Money(new BigDecimal("10.00")))
-            ));
+            OrderItemDto dto = new OrderItemDto(PRODUCT_ID, 2, new BigDecimal("10.00"));
             when(orderRepository.save(any(Order.class))).thenAnswer(inv -> inv.getArgument(0));
 
-            Order result = orderApplicationService.create(CUSTOMER_ID, List.of(cmd));
+            var result = orderApplicationService.create(CUSTOMER_ID, List.of(dto));
 
             ArgumentCaptor<Order> captor = ArgumentCaptor.forClass(Order.class);
             verify(orderRepository).save(captor.capture());
@@ -62,22 +59,26 @@ class OrderApplicationServiceTest {
             assertThat(captured.getItems().get(0).getQuantity()).isEqualTo(2);
             assertThat(captured.getTotalAmount().getAmount()).isEqualByComparingTo("20.00");
             assertThat(result).isNotNull();
+            assertThat(result.getOrderId()).isEqualTo(captured.getId());
+            assertThat(result.getStatus()).isEqualTo(OrderStatus.PENDING.name());
+            assertThat(result.getTotalAmount()).isEqualByComparingTo("20.00");
         }
 
         @Test
         void createWithMultipleItems_calculatesTotalCorrectly() {
-            List<OrderItemCommand> commands = List.of(
-                    new OrderItemCommand(PRODUCT_ID, 2, new BigDecimal("5.00")),
-                    new OrderItemCommand(UUID.randomUUID(), 1, new BigDecimal("10.00"))
+            List<OrderItemDto> dtos = List.of(
+                    new OrderItemDto(PRODUCT_ID, 2, new BigDecimal("5.00")),
+                    new OrderItemDto(UUID.randomUUID(), 1, new BigDecimal("10.00"))
             );
             when(orderRepository.save(any(Order.class))).thenAnswer(inv -> inv.getArgument(0));
 
-            orderApplicationService.create(CUSTOMER_ID, commands);
+            var output = orderApplicationService.create(CUSTOMER_ID, dtos);
 
             ArgumentCaptor<Order> captor = ArgumentCaptor.forClass(Order.class);
             verify(orderRepository).save(captor.capture());
             assertThat(captor.getValue().getItems()).hasSize(2);
             assertThat(captor.getValue().getTotalAmount().getAmount()).isEqualByComparingTo("20.00");
+            assertThat(output.getTotalAmount()).isEqualByComparingTo("20.00");
         }
     }
 
@@ -92,10 +93,11 @@ class OrderApplicationServiceTest {
             ));
             when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
 
-            Optional<Order> result = orderApplicationService.getById(orderId);
+            var result = orderApplicationService.getById(orderId);
 
             assertThat(result).isPresent();
             assertThat(result.get().getCustomerId()).isEqualTo(CUSTOMER_ID);
+            assertThat(result.get().getOrderId()).isEqualTo(order.getId());
         }
 
         @Test
@@ -103,7 +105,7 @@ class OrderApplicationServiceTest {
             UUID orderId = UUID.randomUUID();
             when(orderRepository.findById(orderId)).thenReturn(Optional.empty());
 
-            Optional<Order> result = orderApplicationService.getById(orderId);
+            var result = orderApplicationService.getById(orderId);
 
             assertThat(result).isEmpty();
         }
@@ -121,9 +123,10 @@ class OrderApplicationServiceTest {
             when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
             when(orderRepository.save(any(Order.class))).thenAnswer(inv -> inv.getArgument(0));
 
-            Order result = orderApplicationService.pay(orderId);
+            var result = orderApplicationService.pay(orderId);
 
-            assertThat(result.getStatus()).isEqualTo(OrderStatus.PAID);
+            assertThat(result.getStatus()).isEqualTo(OrderStatus.PAID.name());
+            assertThat(result.getOrderId()).isEqualTo(orderId);
             verify(orderRepository).save(order);
         }
 

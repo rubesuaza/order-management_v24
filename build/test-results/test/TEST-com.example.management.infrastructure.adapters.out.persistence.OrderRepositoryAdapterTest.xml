@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:47:46.445Z" hostname="RubenS" time="0.519">
+<testsuite name="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-02-15T16:50:37.905Z" hostname="RubenS" time="0.606">
   <properties/>
-  <testcase name="findById_existingOrder_returnsOrder()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.371"/>
-  <testcase name="save_newOrder_persistsAndReturnsOrder()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.054"/>
-  <testcase name="save_afterMarkAsPaid_updatesStatus()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.05"/>
-  <testcase name="findById_nonExistent_returnsEmpty()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.022"/>
-  <system-out><![CDATA[2026-02-15T11:47:44.655-05:00  INFO 13406 --- [management] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest]: OrderRepositoryAdapterTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-02-15T11:47:44.867-05:00  INFO 13406 --- [management] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.management.ManagementApplication for test class com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest
+  <testcase name="findById_existingOrder_returnsOrder()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.492"/>
+  <testcase name="save_newOrder_persistsAndReturnsOrder()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.033"/>
+  <testcase name="save_afterMarkAsPaid_updatesStatus()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.061"/>
+  <testcase name="findById_nonExistent_returnsEmpty()" classname="com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest" time="0.013"/>
+  <system-out><![CDATA[2026-02-15T11:50:36.856-05:00  INFO 14791 --- [management] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest]: OrderRepositoryAdapterTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-15T11:50:36.956-05:00  INFO 14791 --- [management] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.management.ManagementApplication for test class com.example.management.infrastructure.adapters.out.persistence.OrderRepositoryAdapterTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -16,16 +16,16 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2026-02-15T11:47:45.074-05:00  INFO 13406 --- [management] [    Test worker] c.e.m.i.a.o.p.OrderRepositoryAdapterTest : Starting OrderRepositoryAdapterTest using Java 17.0.18 with PID 13406 (started by root in /root/agent_code_generator/workspaces/order_management_workspace/order-management_v24)
-2026-02-15T11:47:45.076-05:00  INFO 13406 --- [management] [    Test worker] c.e.m.i.a.o.p.OrderRepositoryAdapterTest : The following 1 profile is active: "test"
-2026-02-15T11:47:45.640-05:00  INFO 13406 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-02-15T11:47:45.673-05:00  INFO 13406 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 1 JPA repository interface.
-2026-02-15T11:47:45.766-05:00  INFO 13406 --- [management] [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2026-02-15T11:47:45.888-05:00  INFO 13406 --- [management] [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:161ae496-b780-4bf8-be25-8057ff4ba482;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2026-02-15T11:47:46.007-05:00  INFO 13406 --- [management] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-02-15T11:47:46.017-05:00  INFO 13406 --- [management] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-02-15T11:47:46.029-05:00  INFO 13406 --- [management] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-02-15T11:47:46.216-05:00  INFO 13406 --- [management] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-15T11:50:37.072-05:00  INFO 14791 --- [management] [    Test worker] c.e.m.i.a.o.p.OrderRepositoryAdapterTest : Starting OrderRepositoryAdapterTest using Java 17.0.18 with PID 14791 (started by root in /root/agent_code_generator/workspaces/order_management_workspace/order-management_v24)
+2026-02-15T11:50:37.073-05:00  INFO 14791 --- [management] [    Test worker] c.e.m.i.a.o.p.OrderRepositoryAdapterTest : The following 1 profile is active: "test"
+2026-02-15T11:50:37.344-05:00  INFO 14791 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-15T11:50:37.365-05:00  INFO 14791 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interface.
+2026-02-15T11:50:37.426-05:00  INFO 14791 --- [management] [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2026-02-15T11:50:37.502-05:00  INFO 14791 --- [management] [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:ac047e5a-9765-4e6c-bfb8-5eccf397704d;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2026-02-15T11:50:37.571-05:00  INFO 14791 --- [management] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-15T11:50:37.577-05:00  INFO 14791 --- [management] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-15T11:50:37.584-05:00  INFO 14791 --- [management] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-15T11:50:37.721-05:00  INFO 14791 --- [management] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists order_items cascade 
 Hibernate: drop table if exists orders cascade 
 Hibernate: create table order_items (quantity integer not null, unit_price numeric(19,2) not null, id uuid not null, order_id uuid not null, product_id uuid not null, primary key (id))
@@ -33,18 +33,29 @@ Hibernate: create table orders (currency varchar(3) not null, total_amount numer
 Hibernate: create index idx_orders_customer_id on orders (customer_id)
 Hibernate: create index idx_orders_status on orders (status)
 Hibernate: alter table if exists order_items add constraint FKbioxgbv59vetrxe0ejfubep1w foreign key (order_id) references orders
-2026-02-15T11:47:46.245-05:00  INFO 13406 --- [management] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-02-15T11:47:46.432-05:00  INFO 13406 --- [management] [    Test worker] c.e.m.i.a.o.p.OrderRepositoryAdapterTest : Started OrderRepositoryAdapterTest in 1.547 seconds (process running for 16.527)
-Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,oe1_0.status,oe1_0.total_amount from orders oe1_0 where oe1_0.id=?
+2026-02-15T11:50:37.743-05:00  INFO 14791 --- [management] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-15T11:50:37.898-05:00  INFO 14791 --- [management] [    Test worker] c.e.m.i.a.o.p.OrderRepositoryAdapterTest : Started OrderRepositoryAdapterTest in 0.934 seconds (process running for 15.085)
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
 Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,oe1_0.status,oe1_0.total_amount,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
 Hibernate: select oie1_0.id,oie1_0.order_id,oie1_0.product_id,oie1_0.quantity,oie1_0.unit_price from order_items oie1_0 where oie1_0.id=?
-Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,oe1_0.status,oe1_0.total_amount from orders oe1_0 where oe1_0.id=?
+Hibernate: insert into orders (created_at,currency,customer_id,status,total_amount,id) values (?,?,?,?,?,?)
+Hibernate: insert into order_items (order_id,product_id,quantity,unit_price,id) values (?,?,?,?,?)
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
 Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,oe1_0.status,oe1_0.total_amount,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
 Hibernate: select oie1_0.id,oie1_0.order_id,oie1_0.product_id,oie1_0.quantity,oie1_0.unit_price from order_items oie1_0 where oie1_0.id=?
-Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,oe1_0.status,oe1_0.total_amount from orders oe1_0 where oe1_0.id=?
+Hibernate: insert into orders (created_at,currency,customer_id,status,total_amount,id) values (?,?,?,?,?,?)
+Hibernate: insert into order_items (order_id,product_id,quantity,unit_price,id) values (?,?,?,?,?)
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
 Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,oe1_0.status,oe1_0.total_amount,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
 Hibernate: select oie1_0.id,oie1_0.order_id,oie1_0.product_id,oie1_0.quantity,oie1_0.unit_price from order_items oie1_0 where oie1_0.id=?
-Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,oe1_0.status,oe1_0.total_amount from orders oe1_0 where oe1_0.id=?
+Hibernate: insert into orders (created_at,currency,customer_id,status,total_amount,id) values (?,?,?,?,?,?)
+Hibernate: insert into order_items (order_id,product_id,quantity,unit_price,id) values (?,?,?,?,?)
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
+Hibernate: update orders set created_at=?,currency=?,customer_id=?,status=?,total_amount=? where id=?
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
+Hibernate: select oe1_0.id,oe1_0.created_at,oe1_0.currency,oe1_0.customer_id,i1_0.order_id,i1_0.id,i1_0.product_id,i1_0.quantity,i1_0.unit_price,oe1_0.status,oe1_0.total_amount from orders oe1_0 left join order_items i1_0 on oe1_0.id=i1_0.order_id where oe1_0.id=?
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

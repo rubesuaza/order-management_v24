@@ -1,6 +1,6 @@
 package com.example.management.application.ports.in;
 
-import com.example.management.domain.model.Order;
+import com.example.management.application.dtos.PayOrderOutput;
 
 import java.util.UUID;
 
@@ -11,7 +11,7 @@ public interface PayOrderUseCase {
 
     /**
      * @param orderId order to pay
-     * @return the order after payment
+     * @return application-level output DTO for the paid order
      */
-    Order pay(UUID orderId);
+    PayOrderOutput pay(UUID orderId);
 }

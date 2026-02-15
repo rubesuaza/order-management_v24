@@ -1,10 +1,10 @@
 package com.example.management.infrastructure.adapters.in.rest;
 
+import com.example.management.application.dtos.OrderItemDto;
+import com.example.management.application.dtos.OrderDetailOutput;
 import com.example.management.application.ports.in.CreateOrderUseCase;
 import com.example.management.application.ports.in.GetOrderUseCase;
-import com.example.management.application.ports.in.OrderItemCommand;
 import com.example.management.application.ports.in.PayOrderUseCase;
-import com.example.management.domain.model.Order;
 import com.example.management.infrastructure.adapters.in.rest.dto.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for order API (base path /api/v1).
+ * Depends only on application-layer ports and DTOs, not on domain model.
  */
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -30,18 +30,18 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<CreateOrderResponse> createOrder(@Valid @RequestBody CreateOrderRequest request) {
-        List<OrderItemCommand> items = request.getItems().stream()
-                .map(i -> new OrderItemCommand(
+        List<OrderItemDto> items = request.getItems().stream()
+                .map(i -> new OrderItemDto(
                         i.getProductId(),
                         i.getQuantity(),
                         i.getUnitPrice()))
-                .collect(Collectors.toList());
-        Order order = createOrderUseCase.create(request.getCustomerId(), items);
+                .toList();
+        var output = createOrderUseCase.create(request.getCustomerId(), items);
         CreateOrderResponse response = new CreateOrderResponse(
-                order.getId(),
-                order.getStatus().name(),
-                order.getTotalAmount().getAmount(),
-                order.getCreatedAt()
+                output.getOrderId(),
+                output.getStatus(),
+                output.getTotalAmount(),
+                output.getCreatedAt()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -56,25 +56,25 @@ public class OrderController {
 
     @PostMapping("/{orderId}/pay")
     public ResponseEntity<PayOrderResponse> payOrder(@PathVariable UUID orderId) {
-        Order order = payOrderUseCase.pay(orderId);
-        PayOrderResponse response = new PayOrderResponse(order.getId(), order.getStatus().name());
+        var output = payOrderUseCase.pay(orderId);
+        PayOrderResponse response = new PayOrderResponse(output.getOrderId(), output.getStatus());
         return ResponseEntity.ok(response);
     }
 
-    private OrderDetailResponse toOrderDetailResponse(Order order) {
-        List<OrderItemResponse> itemResponses = order.getItems().stream()
+    private OrderDetailResponse toOrderDetailResponse(OrderDetailOutput output) {
+        List<OrderItemResponse> itemResponses = output.getItems().stream()
                 .map(i -> new OrderItemResponse(
                         i.getProductId(),
                         i.getQuantity(),
-                        i.getUnitPrice().getAmount()))
-                .collect(Collectors.toList());
+                        i.getUnitPrice()))
+                .toList();
         return new OrderDetailResponse(
-                order.getId(),
-                order.getCustomerId(),
-                order.getStatus().name(),
+                output.getOrderId(),
+                output.getCustomerId(),
+                output.getStatus(),
                 itemResponses,
-                order.getTotalAmount().getAmount(),
-                order.getTotalAmount().getCurrency()
+                output.getTotalAmount(),
+                output.getCurrency()
         );
     }
 }
