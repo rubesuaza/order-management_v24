@@ -1,21 +1,25 @@
 spring:
   application:
-    name: management
+    name: order-management
+  
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:orderdb
     driver-class-name: org.h2.Driver
     username: sa
-    password:
+    password: 
+  
   h2:
     console:
       enabled: true
       path: /h2-console
+  
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
 
 server:
@@ -25,3 +29,4 @@ logging:
   level:
     com.example.management: DEBUG
     org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
