@@ -31,7 +31,7 @@ public class OrderWebMapper {
         return OrderResponse.builder()
                 .orderId(order.getOrderId())
                 .customerId(order.getCustomerId())
-                .status(order.getStatus())
+                .status(order.getStatus().name())
                 .createdAt(order.getCreatedAt())
                 .items(order.getItems().stream()
                         .map(this::toItemResponse)

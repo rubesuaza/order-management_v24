@@ -1,8 +1,9 @@
 package com.example.management.application.services;
 
-import com.example.management.application.ports.out.OrderRepository;
+import com.example.management.domain.enums.OrderStatusUpdateAction;
 import com.example.management.domain.exception.OrderNotFoundException;
 import com.example.management.domain.model.Order;
+import com.example.management.domain.port.out.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,12 +48,5 @@ public class OrderService {
             throw new OrderNotFoundException(orderId);
         }
         orderRepository.deleteById(orderId);
-    }
-
-    public enum OrderStatusUpdateAction {
-        MARK_AS_PAID,
-        MARK_AS_SHIPPED,
-        MARK_AS_DELIVERED,
-        CANCEL
     }
 }

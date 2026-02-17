@@ -36,7 +36,7 @@ public class OrderEntity {
     @Column(name = "customer_id", nullable = false, columnDefinition = "UUID")
     private UUID customerId;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private List<OrderItemEntity> items = new ArrayList<>();
 }

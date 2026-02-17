@@ -4,7 +4,7 @@ import com.example.management.application.services.OrderService;
 import com.example.management.domain.model.Money;
 import com.example.management.domain.model.Order;
 import com.example.management.domain.model.OrderItem;
-import com.example.management.domain.model.OrderStatus;
+import com.example.management.domain.enums.OrderStatusUpdateAction;
 import com.example.management.infrastructure.adapters.in.web.dto.CreateOrderRequest;
 import com.example.management.infrastructure.adapters.in.web.dto.OrderItemRequest;
 import com.example.management.infrastructure.adapters.in.web.dto.OrderResponse;
@@ -66,7 +66,11 @@ class OrderControllerTest {
         OrderResponse response = OrderResponse.builder()
                 .orderId(order.getOrderId())
                 .customerId(customerId)
-                .status(OrderStatus.PENDING)
+                .status("PENDING")
+                .createdAt(null)
+                .items(null)
+                .totalAmount(null)
+                .currency(null)
                 .build();
 
         when(mapper.toDomain(any(CreateOrderRequest.class))).thenReturn(order);
@@ -95,7 +99,11 @@ class OrderControllerTest {
         OrderResponse response = OrderResponse.builder()
                 .orderId(orderId)
                 .customerId(customerId)
-                .status(OrderStatus.PENDING)
+                .status("PENDING")
+                .createdAt(null)
+                .items(null)
+                .totalAmount(null)
+                .currency(null)
                 .build();
 
         when(orderService.getOrderById(orderId)).thenReturn(Optional.of(order));
@@ -133,10 +141,15 @@ class OrderControllerTest {
         order.markAsPaid();
         OrderResponse response = OrderResponse.builder()
                 .orderId(orderId)
-                .status(OrderStatus.PAID)
+                .customerId(null)
+                .status("PAID")
+                .createdAt(null)
+                .items(null)
+                .totalAmount(null)
+                .currency(null)
                 .build();
 
-        when(orderService.updateOrderStatus(eq(orderId), eq(OrderService.OrderStatusUpdateAction.MARK_AS_PAID)))
+        when(orderService.updateOrderStatus(eq(orderId), eq(OrderStatusUpdateAction.MARK_AS_PAID)))
                 .thenReturn(order);
         when(mapper.toResponse(order)).thenReturn(response);
 
@@ -145,7 +158,7 @@ class OrderControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("PAID"));
 
-        verify(orderService).updateOrderStatus(orderId, OrderService.OrderStatusUpdateAction.MARK_AS_PAID);
+        verify(orderService).updateOrderStatus(orderId, OrderStatusUpdateAction.MARK_AS_PAID);
     }
 
     @Test

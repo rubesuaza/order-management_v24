@@ -1,6 +1,6 @@
 package com.example.management.infrastructure.adapters.out.persistence;
 
-import com.example.management.application.ports.out.OrderRepository;
+import com.example.management.domain.port.out.OrderRepository;
 import com.example.management.domain.model.Order;
 import com.example.management.infrastructure.adapters.out.persistence.entity.OrderEntity;
 import com.example.management.infrastructure.adapters.out.persistence.mapper.OrderMapper;
@@ -30,7 +30,7 @@ public class OrderPersistenceAdapter implements OrderRepository {
 
     @Override
     public Optional<Order> findById(UUID orderId) {
-        return jpaRepository.findById(orderId)
+        return jpaRepository.findByIdWithItems(orderId)
                 .map(mapper::toDomain);
     }
 
