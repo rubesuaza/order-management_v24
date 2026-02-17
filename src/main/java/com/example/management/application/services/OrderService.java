@@ -1,6 +1,7 @@
 package com.example.management.application.services;
 
 import com.example.management.application.ports.out.OrderRepository;
+import com.example.management.domain.exception.OrderNotFoundException;
 import com.example.management.domain.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class OrderService {
 
     public Order updateOrderStatus(UUID orderId, OrderStatusUpdateAction action) {
         Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new IllegalArgumentException("Order not found: " + orderId));
+                .orElseThrow(() -> new OrderNotFoundException(orderId));
 
         switch (action) {
             case MARK_AS_PAID -> order.markAsPaid();
@@ -43,7 +44,7 @@ public class OrderService {
 
     public void deleteOrder(UUID orderId) {
         if (!orderRepository.existsById(orderId)) {
-            throw new IllegalArgumentException("Order not found: " + orderId);
+            throw new OrderNotFoundException(orderId);
         }
         orderRepository.deleteById(orderId);
     }

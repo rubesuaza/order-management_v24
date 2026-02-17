@@ -25,26 +25,15 @@ public class Order {
     private static final BigDecimal MINIMUM_ORDER_AMOUNT = new BigDecimal("10.00");
 
     public Order(UUID customerId, List<OrderItem> items) {
-        if (customerId == null) {
-            throw new IllegalArgumentException("Customer ID cannot be null");
-        }
-        if (items == null || items.isEmpty()) {
-            throw new DomainException("Order must have at least one OrderItem to be created");
-        }
-        
-        this.orderId = UUID.randomUUID();
-        this.customerId = customerId;
-        this.items = new ArrayList<>(items);
-        this.status = OrderStatus.PENDING;
-        this.createdAt = LocalDateTime.now();
+        this(UUID.randomUUID(), customerId, items, OrderStatus.PENDING, LocalDateTime.now());
     }
 
     /**
-     * Reconstructs an Order from persisted data.
-     * Public method for use by infrastructure adapters.
+     * Private constructor for reconstructing an Order from persisted data.
+     * Used by infrastructure adapters via {@link #reconstruct}.
      */
-    public static Order reconstruct(UUID orderId, UUID customerId, List<OrderItem> items, 
-                            OrderStatus status, LocalDateTime createdAt) {
+    private Order(UUID orderId, UUID customerId, List<OrderItem> items,
+                  OrderStatus status, LocalDateTime createdAt) {
         if (orderId == null) {
             throw new IllegalArgumentException("Order ID cannot be null");
         }
@@ -52,7 +41,7 @@ public class Order {
             throw new IllegalArgumentException("Customer ID cannot be null");
         }
         if (items == null || items.isEmpty()) {
-            throw new DomainException("Order must have at least one OrderItem");
+            throw new DomainException("Order must have at least one OrderItem to be created");
         }
         if (status == null) {
             throw new IllegalArgumentException("Order status cannot be null");
@@ -60,24 +49,20 @@ public class Order {
         if (createdAt == null) {
             throw new IllegalArgumentException("Created at cannot be null");
         }
-        
-        Order order = new Order(customerId, items);
-        try {
-            java.lang.reflect.Field idField = Order.class.getDeclaredField("orderId");
-            idField.setAccessible(true);
-            idField.set(order, orderId);
-            
-            java.lang.reflect.Field statusField = Order.class.getDeclaredField("status");
-            statusField.setAccessible(true);
-            statusField.set(order, status);
-            
-            java.lang.reflect.Field createdAtField = Order.class.getDeclaredField("createdAt");
-            createdAtField.setAccessible(true);
-            createdAtField.set(order, createdAt);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to reconstruct Order", e);
-        }
-        return order;
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.items = new ArrayList<>(items);
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+
+    /**
+     * Reconstructs an Order from persisted data.
+     * Public method for use by infrastructure adapters.
+     */
+    public static Order reconstruct(UUID orderId, UUID customerId, List<OrderItem> items,
+                                   OrderStatus status, LocalDateTime createdAt) {
+        return new Order(orderId, customerId, items, status, createdAt);
     }
 
     /**

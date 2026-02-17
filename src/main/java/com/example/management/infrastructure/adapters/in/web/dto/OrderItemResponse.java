@@ -2,23 +2,21 @@ package com.example.management.infrastructure.adapters.in.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
- * DTO for an order item in responses.
+ * DTO for an order item in responses. Immutable.
  */
-@Data
+@Value
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class OrderItemResponse {
-    private UUID productId;
-    private Integer quantity;
-    private BigDecimal unitPrice;
-    private BigDecimal subtotal;
-    private String currency;
+    UUID productId;
+    Integer quantity;
+    BigDecimal unitPrice;
+    BigDecimal subtotal;
+    String currency;
 }

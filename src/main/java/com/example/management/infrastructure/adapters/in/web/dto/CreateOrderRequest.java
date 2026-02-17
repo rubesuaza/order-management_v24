@@ -2,19 +2,19 @@ package com.example.management.infrastructure.adapters.in.web.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Value;
 
 import java.util.List;
 import java.util.UUID;
 
 /**
- * DTO for creating a new order.
+ * DTO for creating a new order. Immutable.
  */
-@Data
+@Value
 public class CreateOrderRequest {
     @NotNull(message = "Customer ID is required")
-    private UUID customerId;
+    UUID customerId;
 
     @NotEmpty(message = "Order must have at least one item")
-    private List<OrderItemRequest> items;
+    List<OrderItemRequest> items;
 }
