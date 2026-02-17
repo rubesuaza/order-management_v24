@@ -1,12 +1,10 @@
 package com.example.management.domain.model;
 
 import com.example.management.domain.exception.DomainException;
-import com.example.management.domain.exception.InvalidItemException;
 import com.example.management.domain.exception.InvalidOrderStateException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

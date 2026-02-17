@@ -1,5 +1,6 @@
 package com.example.management.infrastructure.adapters.in.web;
 
+import com.example.management.application.commands.OrderStatusUpdateAction;
 import com.example.management.application.services.OrderService;
 import com.example.management.domain.exception.DomainException;
 import com.example.management.domain.exception.InvalidOrderStateException;
@@ -45,26 +46,26 @@ public class OrderController {
 
     @PostMapping("/{orderId}/mark-as-paid")
     public ResponseEntity<OrderResponse> markAsPaid(@PathVariable UUID orderId) {
-        return handleOrderStatusUpdate(orderId, OrderService.OrderStatusUpdateAction.MARK_AS_PAID);
+        return handleOrderStatusUpdate(orderId, OrderStatusUpdateAction.MARK_AS_PAID);
     }
 
     @PostMapping("/{orderId}/mark-as-shipped")
     public ResponseEntity<OrderResponse> markAsShipped(@PathVariable UUID orderId) {
-        return handleOrderStatusUpdate(orderId, OrderService.OrderStatusUpdateAction.MARK_AS_SHIPPED);
+        return handleOrderStatusUpdate(orderId, OrderStatusUpdateAction.MARK_AS_SHIPPED);
     }
 
     @PostMapping("/{orderId}/mark-as-delivered")
     public ResponseEntity<OrderResponse> markAsDelivered(@PathVariable UUID orderId) {
-        return handleOrderStatusUpdate(orderId, OrderService.OrderStatusUpdateAction.MARK_AS_DELIVERED);
+        return handleOrderStatusUpdate(orderId, OrderStatusUpdateAction.MARK_AS_DELIVERED);
     }
 
     @PostMapping("/{orderId}/cancel")
     public ResponseEntity<OrderResponse> cancelOrder(@PathVariable UUID orderId) {
-        return handleOrderStatusUpdate(orderId, OrderService.OrderStatusUpdateAction.CANCEL);
+        return handleOrderStatusUpdate(orderId, OrderStatusUpdateAction.CANCEL);
     }
 
     private ResponseEntity<OrderResponse> handleOrderStatusUpdate(UUID orderId,
-                                                                  OrderService.OrderStatusUpdateAction action) {
+                                                                  OrderStatusUpdateAction action) {
         try {
             Order order = orderService.updateOrderStatus(orderId, action);
             return ResponseEntity.ok(mapper.toResponse(order));

@@ -4,7 +4,7 @@ import com.example.management.application.services.OrderService;
 import com.example.management.domain.model.Money;
 import com.example.management.domain.model.Order;
 import com.example.management.domain.model.OrderItem;
-import com.example.management.domain.enums.OrderStatusUpdateAction;
+import com.example.management.application.commands.OrderStatusUpdateAction;
 import com.example.management.infrastructure.adapters.in.web.dto.CreateOrderRequest;
 import com.example.management.infrastructure.adapters.in.web.dto.OrderItemRequest;
 import com.example.management.infrastructure.adapters.in.web.dto.OrderResponse;
@@ -174,7 +174,7 @@ class OrderControllerTest {
                 .status(OrderStatus.CANCELLED)
                 .build();
 
-        when(orderService.updateOrderStatus(eq(orderId), eq(OrderService.OrderStatusUpdateAction.CANCEL)))
+        when(orderService.updateOrderStatus(eq(orderId), eq(OrderStatusUpdateAction.CANCEL)))
                 .thenReturn(order);
         when(mapper.toResponse(order)).thenReturn(response);
 
@@ -183,7 +183,7 @@ class OrderControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CANCELLED"));
 
-        verify(orderService).updateOrderStatus(orderId, OrderService.OrderStatusUpdateAction.CANCEL);
+        verify(orderService).updateOrderStatus(orderId, OrderStatusUpdateAction.CANCEL);
     }
 
     @Test

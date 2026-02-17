@@ -1,6 +1,7 @@
 package com.example.management.application.services;
 
-import com.example.management.application.ports.out.OrderRepository;
+import com.example.management.application.commands.OrderStatusUpdateAction;
+import com.example.management.domain.port.out.OrderRepository;
 import com.example.management.domain.model.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -83,7 +84,7 @@ class OrderServiceTest {
         // Act
         Order result = orderService.updateOrderStatus(
                 orderId,
-                OrderService.OrderStatusUpdateAction.MARK_AS_PAID
+                OrderStatusUpdateAction.MARK_AS_PAID
         );
 
         // Assert
@@ -104,7 +105,7 @@ class OrderServiceTest {
         // Act
         Order result = orderService.updateOrderStatus(
                 orderId,
-                OrderService.OrderStatusUpdateAction.MARK_AS_SHIPPED
+                OrderStatusUpdateAction.MARK_AS_SHIPPED
         );
 
         // Assert
@@ -125,7 +126,7 @@ class OrderServiceTest {
         // Act
         Order result = orderService.updateOrderStatus(
                 orderId,
-                OrderService.OrderStatusUpdateAction.MARK_AS_DELIVERED
+                OrderStatusUpdateAction.MARK_AS_DELIVERED
         );
 
         // Assert
@@ -146,7 +147,7 @@ class OrderServiceTest {
         // Act
         Order result = orderService.updateOrderStatus(
                 orderId,
-                OrderService.OrderStatusUpdateAction.CANCEL
+                OrderStatusUpdateAction.CANCEL
         );
 
         // Assert
@@ -165,7 +166,7 @@ class OrderServiceTest {
         // Act & Assert
         assertThatThrownBy(() -> orderService.updateOrderStatus(
                 orderId,
-                OrderService.OrderStatusUpdateAction.MARK_AS_PAID
+                OrderStatusUpdateAction.MARK_AS_PAID
         ))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Order not found");

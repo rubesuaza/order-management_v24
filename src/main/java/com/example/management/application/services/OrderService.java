@@ -1,12 +1,11 @@
 package com.example.management.application.services;
 
-import com.example.management.domain.enums.OrderStatusUpdateAction;
+import com.example.management.application.commands.OrderStatusUpdateAction;
 import com.example.management.domain.exception.OrderNotFoundException;
 import com.example.management.domain.model.Order;
 import com.example.management.domain.port.out.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -16,7 +15,6 @@ import java.util.UUID;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class OrderService {
 
     private final OrderRepository orderRepository;

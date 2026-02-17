@@ -2,11 +2,13 @@ package com.example.management.domain.model;
 
 import com.example.management.domain.exception.DomainException;
 import com.example.management.domain.exception.InvalidOrderStateException;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +21,7 @@ public class Order {
     private final UUID orderId;
     private OrderStatus status;
     private final LocalDateTime createdAt;
+    @Getter(AccessLevel.NONE)
     private final List<OrderItem> items;
     private final UUID customerId;
 
@@ -54,6 +57,13 @@ public class Order {
         this.items = new ArrayList<>(items);
         this.status = status;
         this.createdAt = createdAt;
+    }
+
+    /**
+     * Returns an unmodifiable view of the order items to preserve aggregate invariants.
+     */
+    public List<OrderItem> getItems() {
+        return Collections.unmodifiableList(items);
     }
 
     /**
